@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Medizco Center</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form id="loginForm">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <label for="role">Role:</label>
-        <select id="role" name="role">
-            <option value="patient">Patient</option>
-            <option value="doctor">Doctor</option>
-        </select>
-        <button type="submit">Login</button>
-    </form>
-    <script src="js/scripts.js"></script>
+    <div class="form-container">
+        <div class="form-box">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

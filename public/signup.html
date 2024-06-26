@@ -3,25 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
     <link rel="stylesheet" href="css/styles.css">
+    <title>Signup</title>
 </head>
 <body>
-    <h1>Signup</h1>
-    <form id="signupForm" action="/signup" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <label for="role">Role:</label>
-        <select id="role" name="role">
-            <option value="patient">Patient</option>
-            <option value="doctor">Doctor</option>
-        </select>
-        <button type="submit">Signup</button>
-    </form>
-    <script src="js/scripts.js"></script>
+    <div class="form-container">
+        <form id="signupForm">
+            <h2>Signup</h2>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="text" id="country" name="country" placeholder="Country" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const country = document.getElementById('country').value;
+            const phone = document.getElementById('phone').value;
+            const gender = document.getElementById('gender').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/users/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password, country, phone, gender })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Registration successful');
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            }
+        });
+    </script>
 </body>
 </html>
