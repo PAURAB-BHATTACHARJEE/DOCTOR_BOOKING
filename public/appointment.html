@@ -31,6 +31,8 @@
                 </select>
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" required>
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
                 <button type="submit">Book Appointment</button>
             </form>
             <div id="error-message" style="color: red;"></div>
@@ -74,6 +76,7 @@
             const branch = document.getElementById('branch').value;
             const doctorId = document.getElementById('doctor').value;
             const date = document.getElementById('date').value;
+            const email = document.getElementById('email').value;
 
             try {
                 const response = await fetch('http://localhost:5000/api/bookings', {
@@ -81,7 +84,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ patientName, age, gender, city, branch, doctorId, date })
+                    body: JSON.stringify({ patientName, age, gender, city, branch, doctorId, date, email })
                 });
 
                 if (response.ok) {
@@ -90,9 +93,11 @@
                 } else {
                     const errorData = await response.json();
                     document.getElementById('error-message').textContent = errorData.message;
+                    console.error('Error message:', errorData.message);
                 }
             } catch (error) {
                 document.getElementById('error-message').textContent = 'An error occurred. Please try again later.';
+                console.error('Error occurred:', error);
             }
         });
     </script>
